@@ -1,52 +1,67 @@
 package ccc10j4;
 import java.util.*;
 import java.io.*;
-/**
- *
- * @author edwan2505
- */
+
 public class Ccc10j4 {
 
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static StringTokenizer st;
-    
+
+
     public static void main(String[] args) throws IOException{
-        int k = 1;
-        int[] dat;
-        int[]nums;
-        Stack stk = new Stack();
-        boolean cont = true;
-        while (cont) {
-            k = readInt();
-            if(k==0) {
-                cont = false;
+        while(true) {
+            int n = readInt();
+            if(n == 0) {
                 break;
             }
-            dat = new int[k];
-            for (int s=0;s<k;s++) {
-                dat[s]=readInt();
-            }
-            nums = new int[k-1];
-            for (int i=k-2;i>=0;i--) {
-                nums[i] = dat[i+1] - dat[i];
-            }
-            if (k)
-            loops:
-            for (int i=1;i<(nums.length/2)+1;i++) {
-                int[]first = Arrays.copyOfRange(nums,0,i);
-                int[]second = Arrays.copyOfRange(nums,i,i+i);
-                if(Arrays.equals(first,second)) {
-                    System.out.println(i);
-                    break loops;
-                } else if (i==nums.length/2) {
-                    System.out.println(2*i);
-                    break loops;
+            //numbers
+            int [] t = new int[n];
+            int[]dif = new int[n-1];
+            //read numbers in
+            for(int i=0; i<n; i++)
+                t[i] = readInt();
+            //if its only 1 long, there is no pattern
+            if(n == 1) {
+                System.out.println(0);
+            }else {
+                //make difference array
+                for(int i=0; i<dif.length; i++) {
+                    dif[i] = t[i+1] - t[i];
                 }
+                int cyc = 1;
+                //iterate through diff array
+                for(cyc = 1; cyc < dif.length; cyc++) {
+                    //looks for repeat of the first difference
+                    if(dif[cyc] != dif[0]) {
+                        continue;
+                    }
+                    boolean flag = true;
+                    //iterate through diff
+                    for(int i=0; i<dif.length; i++) {
+                        //if there are differences between first cyc and second, keep going
+                        //right now i is 0 and cyc is 3
+                        //i=0 0%3=0 - flag = true
+                        //i=1 1%3=1 - flag = true
+                        //i=2 2%3=2 - flag = true
+                        //i=3 3%3=0 - flag = true (dif[3] == dif[0])
+                        //i=4 4%3=1 - flag = true (dif[4] == dif[1])
+                        //i=5 5%3=2 - flag = true (dif[5] == dif[2])
+                        if(dif[i] != dif[i % cyc]) {
+                            flag = false;
+                        }
+                    }
+                    //otherwise, stop because it is the right answer
+                    if(flag) {
+                        break;
+                    }
+                }
+                System.out.println(cyc);
             }
-            
         }
+
         
     }
+
     static String next () throws IOException {
             while (st == null || !st.hasMoreTokens())
                     st = new StringTokenizer(br.readLine().trim());
