@@ -1,23 +1,25 @@
-package dmopc20c4p1;
+package ccc05j5;
 import java.util.*;
 import java.io.*;
+/**
+ *
+ * @author sonic
+ */
+public class Ccc05j5 {
 
-public class Dmopc20c4p1 {
-
+    
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static StringTokenizer st;
 
     public static void main(String[] args) throws IOException{
-        long t = readLong();
-        
-        for (long k = 0; k < t; k++) {
-            long n = readLong(), s = readLong();
-            long sum = (n * (n+1))/2;
-            long dif = sum-s;
-            long maxB, minB;
-            maxB = Math.min(n,dif-1);
-            minB = dif/2;
-            System.out.println(maxB-minB);
+        while (true) {
+            String s = readLine();
+            if(s.equals("X")) break;
+            while(s.indexOf("ANA")!= -1 || s.indexOf("BAS") != -1)  {
+                s.replaceAll("ANA|BAS", "A");
+            }
+            System.out.println(s.equals("A")?"YES" : "NO");
+            break;
         }
     }
 
