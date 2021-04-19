@@ -14,10 +14,11 @@ public class Acc7p1 {
         long n = readLong();
         for (int i = 0; i < n; i++) {
             long x = readLong();
-            if (x>0) { 
-                System.out.println(x-1);
+            if (x==2) {
+                System.out.println(2);
             } else {
-                System.out.println(0);
+
+            System.out.println(x-1);
             }
         }
     }
