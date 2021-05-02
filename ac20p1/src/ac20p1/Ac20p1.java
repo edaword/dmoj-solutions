@@ -14,36 +14,40 @@ public class Ac20p1 {
 
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	static StringTokenizer st;
-        
+        static long a[] = new long[3];
 	public static void main(String[] args) throws IOException{
             int n = readInt();
-            for (int i=0;i<n;i++) {
-                double a,b,c;
-                a = readDouble();
-                b = readDouble();
-                c = readDouble();
-                double max = Double.MIN_VALUE;
-                double min = 0;
-                max = Math.max(max,a);
-                max = Math.max(max,b);
-                max = Math.max(max,c);
-                if (max == a) {
-                    min = b*b + c*c;
-                } else if (max ==b) {
-                    min = a*a + c*c;
-                } else if (max==c) {
-                    min = a*a+b*b;
-                }
-                max = Math.pow(max,2);
-                if (max == min) {
-                    System.out.println("R");
-                } else if (max>min) {
-                    System.out.println("O");
-                } else if (max<min) {
-                    System.out.println("A");
-                }
+            for (int i = 0; i < n; i++) {
                 
             }
+//            int n = readInt();
+//            for (int i=0;i<n;i++) {
+//                double a,b,c;
+//                a = readDouble();
+//                b = readDouble();
+//                c = readDouble();
+//                double max = Double.MIN_VALUE;
+//                double min = 0;
+//                max = Math.max(max,a);
+//                max = Math.max(max,b);
+//                max = Math.max(max,c);
+//                if (max == a) {
+//                    min = b*b + c*c;
+//                } else if (max ==b) {
+//                    min = a*a + c*c;
+//                } else if (max==c) {
+//                    min = a*a+b*b;
+//                }
+//                max = Math.pow(max,2);
+//                if (max == min) {
+//                    System.out.println("R");
+//                } else if (max>min) {
+//                    System.out.println("O");
+//                } else if (max<min) {
+//                    System.out.println("A");
+//                }
+//                
+//            }
 	}
         
 	static String next () throws IOException {
