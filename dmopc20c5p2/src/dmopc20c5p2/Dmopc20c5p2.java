@@ -16,72 +16,19 @@ public class Dmopc20c5p2 {
     static StringTokenizer st;
     
     public static void main(String[] args) throws IOException{
-        int n = readInt(), m = readInt();
-        double slope = 1;
-        boolean bigSlope = false;
-        
-        if (n<m) {
-            bigSlope = false;
-            slope = (double)(n) / (double)(m);
-        } else if (n>m) {
-            bigSlope = true;
-            slope = (double)(m) / (double)(n);
-        } 
-        
-        
-        
-        //m = width
-        //n = height
-        
-        String first, last;
-        int cnt = 0;
-        
-        last = "";
-        
-        String ans = "";
-        
-        if (!bigSlope) {
-            for (int x = 1; x < m; x++) {
-                if (slope * x % 1 != 0) {
-                    int y = (int)Math.ceil(slope * x);
-
-                    //1st
-                    first = (String.valueOf(y) + " " + x);
-                    if (!first.equals(last)) {
-                        ans += first + "\n";
-                        cnt++;
-                    }
-                    //2nd
-                    last = (String.valueOf(y) + " " + (x+1));
-                    ans += last + "\n";
-                    cnt++;
-                }
-            }
-        } else if (bigSlope) {
-            //note n
-            for (int x = 1; x < n; x++) {
-                if (slope * x % 1 != 0) {
-                    int y = (int)Math.ceil(slope * x);
-
-                    //1st
-                    first = (String.valueOf(x) + " " + y);
-                    if (!first.equals(last)) {
-                        ans += first + "\n";
-                        cnt++;
-                    }
-                    //2nd
-                    last = (String.valueOf(x+1) + " " + (y));
-                    ans += last + "\n";
-                    cnt++;
-                }
+        long n = readLong(), m = readLong();
+        System.out.println(n + m - gcd(n,m));
+        for (int i = 0; i < n; i++) {
+            long left = (i-1)*m / n + 1;
+            long right = (i*m+n-1)/n;
+            for (long j = left; j < right+1; j++) {
+                System.out.println(i + " " + j);
             }
         }
-        
-        
-        
-        System.out.println(cnt);
-        System.out.println(ans.trim());
-        
+    }
+    
+    static long gcd(long m, long n) {
+        return n==0 ? m : gcd(n,m%n);
     }
     
     static String next() throws IOException {
