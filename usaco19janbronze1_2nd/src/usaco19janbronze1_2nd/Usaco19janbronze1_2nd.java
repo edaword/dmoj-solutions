@@ -1,4 +1,4 @@
-package usaco19janbronze1_2nd;
+//package usaco19janbronze1_2nd;
 import java.util.*;
 import java.io.*;
 
@@ -9,7 +9,7 @@ public class Usaco19janbronze1_2nd {
     public static void main(String[] args) throws IOException{
         int n;
         n = readInt();
-        System.out.println(n);
+//        System.out.println(n);
         int[] spots = new int[3];
         int[] guesses = new int[3];
         for	(int i=0;i<3;i++) {
