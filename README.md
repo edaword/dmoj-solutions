@@ -1,4 +1,4 @@
 # dmoj-solutions
-ALL MY DMOJ SOLUTIONS (not that many)  
+ALL MY DMOJ SOLUTIONS and also usaco (and some cf)  
 
 only use java rn but might learn cpp in the future
