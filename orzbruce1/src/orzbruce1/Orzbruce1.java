@@ -9,11 +9,15 @@ public class Orzbruce1 {
     static StringTokenizer st;
 
     public static void main(String[] args) throws IOException{
-        DecimalFormat df = new DecimalFormat(".00");
-        int a = readInt(), b = readInt(), c = readInt();
-        double ans = a/40000.0 + b/60000.0 + c/70000.0;
-        ans *= 60;
-        System.out.println(df.format(ans));
+        String test = "abcdef";
+        for (int i = 0; i < test.length(); i++) {
+            System.out.println((int)(test.charAt(i)-97));
+        }
+//        DecimalFormat df = new DecimalFormat(".00");
+//        int a = readInt(), b = readInt(), c = readInt();
+//        double ans = a/40000.0 + b/60000.0 + c/70000.0;
+//        ans *= 60;
+//        System.out.println(df.format(ans));
     }
 
     static String next () throws IOException {
