@@ -11,8 +11,6 @@ public class Arrow {
     static StringTokenizer st;
     
     public static void main(String[] args) throws IOException {
-        Path x;
-        
         int n = readInt();
         loops:
         for (int i = 1; i <= n; i++) {
@@ -27,35 +25,26 @@ public class Arrow {
             points.add(lowPoint);
             points.add(hiPoint);
             //calculate path
-            x = calc(points);
-            System.out.println("round: " + i);
-            System.out.println(x.a);
-            System.out.println(x.b);
-            System.out.println(x.c);
-            System.out.println("");
+            Path x = calc(points);
+//            System.out.println("round: " + i);
+//            System.out.println(x.a);
+//            System.out.println(x.b);
             //check if path goes through all points
             for (int j=0;j<targets.size();j++) {
                 boolean check = hit(x,targets.get(j));
                 if (!check) {
-                    System.out.println(i);
-                    break loops;
+//                    System.out.println("did not hit");
+                    System.out.println(i-1);
+                    return;
                 }
             } 
-            if (i==n-1) {
-                System.out.println(i);
-            }
         }
-        
-//        Range r = new Range(2,8,12); targets.add(r); 
-//        r = new Range (5,4,5); targets.add(r); 
-//        r = new Range (3,8,10); targets.add(r); 
-//        r = new Range (6,2,3); targets.add(r); 
-//        r = new Range (1,3,7); targets.add(r);
-    
+        System.out.println(n);
     }
     
+    //check if path intersects with target
     static boolean hit (Path arrow, Range target) {
-        double arrowY = (arrow.a * Math.pow(target.xVal, 2)) + (arrow.b * target.xVal) + arrow.c;
+        double arrowY = (arrow.a * Math.pow(target.xVal, 2)) + (arrow.b * target.xVal);
         if (arrowY > target.max || arrowY < target.min) {
             return false;
         } else {
@@ -63,6 +52,7 @@ public class Arrow {
         }
     }
     
+    //calculate path with least squares
     static Path calc (ArrayList<Point> points) {
         
         //testing data - 5 points
@@ -72,14 +62,9 @@ public class Arrow {
         //(3,395)
         //(4,361)
         
-        //step 1
         double sumX = 0, sumX2 = 0, sumX3 = 0, sumX4 = 0;
         double sumY = 0;
         double sumXY = 0, sumX2Y = 0;
-        
-        //step 2
-        double xx , xx2, x2x2;
-        double xy, x2y;
         
         double n = points.size();
         
@@ -94,27 +79,19 @@ public class Arrow {
             sumX2Y += Math.pow(points.get(i).xVal,2) * points.get(i).yVal; //11286
         }
         
-        xx = sumX2 - (sumX * sumX)/n; //10
-        xy = sumXY - (sumX * sumY)/n; //140
-        xx2 = sumX3 - (sumX2 * sumX)/n; //40
-        x2y = sumX2Y - (sumX2 * sumY)/n; //336
-        x2x2 = sumX4 - (sumX2 * sumX2)/n; //174
-        
-        double a, b, c;
-        a = ((x2y * xx) - (xy * xx2))/((xx * x2x2) - (xx2 * xx2)); // -16
-        b = ((xy * x2x2) - (x2y * xx2))/((xx * x2x2) - (xx2 * xx2)); // 78
-        c = ((sumY / n) - (b * (sumX/n)) - (a * (sumX2/n))); // 305
-//        c =0;
-        Path p = new Path(a,b,c);
+        double a, b;
+        a = ((sumX2Y * sumX2) - (sumXY * sumX3)) / ((sumX2 * sumX4) - Math.pow(sumX3,2));
+        b = ((sumXY * sumX4) - (sumX2Y * sumX3)) / ((sumX2 * sumX4) - Math.pow(sumX3,2));
+
+        Path p = new Path(a,b);
         return p;
     }
     
     static public class Path {
-        double a, b,c;
-        public Path (double a, double b, double c) {
+        double a, b;
+        public Path (double a, double b) {
             this.a = a;
             this.b = b;
-            this.c = c;
         }
     }
     
